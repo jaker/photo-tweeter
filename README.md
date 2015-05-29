@@ -19,15 +19,15 @@ uploads/         # this is where the photos arrive <resize-watch: resize and cop
 |--resized/      # photos are tweeted once they arrive here <tweet-watch>
 ```
 
-`resize-watch`: watches `uploads` folder for images. When one arrives, do the following:
- - resizes the image (twitter has a 5mb limit) and copies it to `resized` folder
+`resize-watch`: watches `uploads/` folder for images. When one arrives, do the following:
+ - resizes the image (twitter has a 5mb limit) and copies it to `resized/` folder
 
-`tweet-watch`: watches `resized` folder for images. When one arrives, do the following:
+`tweet-watch`: watches `resized/` folder for images. When one arrives, do the following:
  - tweet the image
 
  ### Twitter
 
- You'll need a registered twitter app with the following credentials. Put them in a separate file `config.js` that looks like this:
+ You'll need a registered twitter app with the following credentials. Put them in a separate file named `config.js` that looks like this:
 
  ```javascript
  module.exports = {
