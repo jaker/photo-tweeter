@@ -3,4 +3,6 @@ node_modules
 staging
 uploads
 
+config.js
+
 .DS_Store
