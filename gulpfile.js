@@ -9,13 +9,20 @@ var config = require('./config.js');
 
 var T = new Twit(config);
 
-var patterns = '*.{jpg,JPG,jpeg,JPEG}';
-var sourceDir = 'uploads/';
+//var patterns = '*.{jpg,JPG,jpeg,JPEG}';
+var sourceDir = '../';
+//var sourceDir = 'uploads/';
 var resizedDir = sourceDir + 'resized/';
 
+function endsWith(str, suffix) {
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
 gulp.task('resize-watch', function() {
-  return gulp.watch(sourceDir + patterns, function(event) {
-    if (event.type === 'added') {
+  console.log(sourceDir);
+  return gulp.watch(sourceDir + '*', function(event) {
+    console.log(event.type);
+    if (event.type === 'added' && endsWith(event.path, '.JPG')) {
       gulp.src(event.path)
         // newer() checks if the file is already in gulp.dest() location
         // so we don't re-process files that have already gone through pipeline
@@ -36,9 +43,11 @@ gulp.task('resize-watch', function() {
 });
 
 gulp.task('tweet-watch', function() {
-  return gulp.watch(resizedDir + patterns, function(event) {
+  console.log(resizedDir);
+  return gulp.watch(resizedDir + '*', function(event) {
 
-    if (event.type === 'added') {
+    console.log(event.type);
+    if (event.type === 'added' && endsWith(event.path, '.JPG')) {
       console.log(event.path);
       var b64content = fs.readFileSync(event.path, {encoding: 'base64'});
 
